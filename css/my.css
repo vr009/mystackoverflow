@@ -77,6 +77,7 @@ main > .container {
   margin-top: 75px;
   max-width: 1130px;
   max-width: -webkit-fill-available;
+  max-width: -moz-available;
 }
 
 .question_head{
@@ -92,6 +93,10 @@ main > .container {
     margin-top: 12px;
 }
 
+
+.question_text{
+  margin-inline: auto;
+}
 
 .profile img{
   border-radius: .45rem;
@@ -109,6 +114,12 @@ main > .container {
   height: 215px;
 }
 
+.btn-group, .btn-group-vertical {
+	position: relative;
+	display: inline-flex;
+	vertical-align: middle;
+	margin-top: 10px;
+}
 
 .global{
   margin-top: 30px;
@@ -126,4 +137,12 @@ main > .container {
 
 .plus{
   color: blue;
+}
+
+.form-control2{
+    width: 75px;
+}
+
+.form-control3{
+    width: 45px;
 }
