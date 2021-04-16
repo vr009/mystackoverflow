@@ -1,0 +1,16 @@
+{% load static %}
+<div class="row question">
+          <div class="col-3">
+            <img src="{% static "img/dartvader.jpg"%}">
+            <form action="" class="like_button">
+              <p><input type="number" name="t" value="35" min="34" max="36" step="1"></p>
+            </form>
+          </div>
+
+        <div class="col-8">
+          <h4><a href="/question/2/"> {{ question.user }}'s {{ question.title }} </a></h4>
+          <p>{{ question.text }}</p>
+          <p>Tags: <a href="/tag/bla">Star Wars</a> <a href="/tag/bla">{{ question.tag }}</a> </p>
+          <a href="#">answers(15)</a>
+        </div>
+</div>
