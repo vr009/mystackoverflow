@@ -1,0 +1,65 @@
+{% load static %}
+<!doctype html>
+<html lang="en" class="h-100">
+  <head>
+    <title>mystack</title>
+    <!-- Bootstrap core CSS -->
+<link href="{% static "css/bootstrap.min.css"%}" rel="stylesheet">
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+    <!-- Custom styles for this template -->
+    <link href="{% static "css/my.css" %}" rel="stylesheet">
+  </head>
+
+
+  <body class="d-flex flex-column h-100">
+
+  {% include "include/navbar.html" %}
+
+<!-- Begin page content -->
+<main class="flex-shrink-0">
+    <div class="container">
+        <div class="row">
+            <div class="col-8 global">
+                {% block left_side %}
+
+                {% endblock left_side %}
+            </div>
+
+            <div class="col-4 global_right">
+                {% block right_side %}
+
+                {% endblock right_side %}
+            </div>
+
+        </div>
+
+    </div>
+
+</main>
+
+<footer class="footer mt-auto py-3 bg-light">
+  <div class="container">
+    <span class="text-muted">Supported by </span>
+  </div>
+</footer>
+
+
+    <script src="js/bootstrap.bundle.min.js"></script>
+
+
+  </body>
+</html>

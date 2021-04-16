@@ -19,5 +19,11 @@ from app import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.index)
+    path('ask/', views.ask),
+    path('login/', views.login),
+    path('question/', views.question),
+    path('settings/', views.settings),
+    path('signup/', views.signup),
+    path('tagpage/', views.tagpage),
+    path('index/<int:pk>/', views.one_question, name='index')
 ]
