@@ -3,14 +3,14 @@
     <div class="row" style="display: contents;">
       <div class="col-10">
         <div class="container-fluid" style="display:flex;">
-           <a class="navbar-brand" href="#">mystack</a>
+           <a class="navbar-brand" href="{% url "new_questions" %}">mystack</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <form class="d-flex">
               <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-success" type="submit">Ask</button>
+              <button class="btn btn-outline-success" formaction="{% url "ask" %}" type="submit">Ask</button>
             </form>
 
           </div>

@@ -16,15 +16,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from app import views
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.index),
-    path('hot/', views.hot),
-    path('tag/bla/', views.onetag),
-    path('ask/', views.ask),
-    path('login/', views.login),
-    path('question/<int:pk>/', views.one_question),
-    #path('settings/', views.settings),
-    path('signup/', views.signup)
+    path('', views.index, name='new_questions'),
+    path('hot/', views.hot, name='hot_questions'),
+    path('tag/<str:tag>/', views.onetag, name='tags'),
+    path('ask/', views.ask, name='ask'),
+    path('login/', views.login, name='login'),
+    path('question/<int:pk>/', views.one_question,name='question_answers'),
+    path('settings/', views.settings, name='settings'),
+    path('signup/', views.signup, name='signup')
 ]
