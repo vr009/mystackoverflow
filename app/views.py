@@ -1,68 +1,45 @@
 from django.shortcuts import render
 from .models import Profile, Question, Tag, Like, Answer
 
-tags = ["favorite language", "the best os", "linux", "microsoft", "github", "docker"]
+OBJ_NUM = 5
 
-users = ["dart vader", "obi-wan kenobi", "Palpatine", "Luke skywalker"]
-
-pics = [ "dartvader.jpg", "obi_wan.jpg", "sidious.jpg", "luke.jpg" ]
-
-questions = [
-    {
-        'id': idx,
-        'tag': tags[idx],
-        'user': users[idx],
-        'pic': "/static/img/" + pics[idx],       # a bit hard code
-        'title': f'favourite os',
-        'text': f'Some text for question #{idx}'
-    } for idx in range(len(users))
-]
-
-answers = [
-    {
-        'id': idx,
-        'tag': tags[idx],
-        'user': users[idx],
-        'pic': "/static/img/" + pics[idx],       # a bit hard code
-        'title': f'favourite osblablablabla' ,
-        'text': f'In my opinion that depends on #{idx} '*6
-    } for idx in range(len(users))
-]
+def paginate(object_list, signed_up:bool, request, per_page=5):
+    pass
 
 
 
 # список новых вопросов
 def index(request):
-    questions = Question.objects.new()
-    return render(request, 'index.html', {'questions': questions})
+    questions = Question.objects.new(OBJ_NUM)
+    return render(request, 'index.html', {'questions': questions, 'signed_up': True})
 
 #список горячих вопросов
 def hot(request):
-    questions = Question.objects.hot()
-    return render(request, 'hot.html', {'questions': questions})
+    questions = Question.objects.hot(OBJ_NUM)
+    return render(request, 'hot.html', {'questions': questions, 'signed_up': False})
 
 #список вопросов по тегу
 def onetag(request, tag):
     questions = Question.objects.by_tag(tag)
-    return render(request, 'onetag.html', {'questions': questions })
+    return render(request, 'onetag.html', {'questions': questions , 'signed_up': True})
 
 
 def ask(request):
-    return render(request, 'ask.html', {})
+    return render(request, 'ask.html', {'signed_up': True})
 
 def login(request):
-    return render(request, 'login.html', {})
+    return render(request, 'login.html', {'signed_up': True})
 
 def settings(request):
-    return render(request, 'settings.html', {})
+    return render(request, 'settings.html', {'signed_up': True})
 
 def signup(request):
-    return render(request, 'signup.html', {})
+    return render(request, 'signup.html', {'signed_up': False})
 
 def tagpage(request):
-    return render(request, 'tagpage.html', {})
+    return render(request, 'tagpage.html', {'signed_up': False})
 
 def one_question(request, pk: int):
-    question = Question.objects.filter(id=pk)
+    question = Question.objects.get(id=pk)
     answers = Answer.objects.by_question(pk)
-    return render(request, 'question.html', {"question": question, "answers": answers})
+    return render(request, 'question.html', {"question": question, "answers": answers, 'signed_up': True})

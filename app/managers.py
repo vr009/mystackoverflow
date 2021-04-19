@@ -11,11 +11,11 @@ class UserManager(models.Manager):
 
 
 class QuestionManager(models.Manager):
-    def hot(self):
-        return self.order_by('-rating')
+    def hot(self, num:int):
+        return self.order_by('-rating')[:num]
 
-    def new(self):
-        return self.order_by('-date')
+    def new(self, num:int):
+        return self.order_by('-date')[:num]
 
     def by_tag(self, tag):
         return self.filter(tags__name__iexact=tag).order_by('-rating')
@@ -24,7 +24,6 @@ class QuestionManager(models.Manager):
 class AnswerManager(models.Manager):
     def by_question(self, quest_id: int):
         return self.filter(question=quest_id).all()
-
 
 
 

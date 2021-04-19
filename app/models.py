@@ -2,7 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 from app.managers import UserManager, QuestionManager, TagManager, AnswerManager
 
-# Create your models here.
 
 
 class Profile(models.Model):
@@ -17,6 +16,8 @@ class Profile(models.Model):
     class Meta:
         verbose_name = "Авторы"
         verbose_name_plural = "Авторы"
+
+
 
 class Question(models.Model):
     title = models.CharField(max_length=255)

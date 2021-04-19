@@ -2,9 +2,11 @@
 <div class="row question">
           <div class="col-3">
             <img src="/static/img/luke.jpg">
-            <form action="" class="like_button">
-              <p><input type="number" name="t" value="35" min="34" max="36" step="1"></p>
-            </form>
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <button type="button" class="btn btn-outline-secondary">Like</button>
+                <button type="button" class="btn btn-outline-secondary" style="width: 70px;">Dislike</button>
+                <input type="text" class="form-control2" placeholder="{{ question.rating }}" aria-label="15" aria-describedby="btnGroupAddon" style="width: 25px;">
+            </div>
           </div>
 
         <div class="col-8">

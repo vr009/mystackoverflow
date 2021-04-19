@@ -27,7 +27,12 @@
 
   <body class="d-flex flex-column h-100">
 
-  {% include "include/navbar.html" %}
+{% if signed_up %}
+    {% include "include/navbar.html" %}
+{% else %}
+    {% include "include/navbar_unreg.html" %}
+{% endif %}
+
 
 <!-- Begin page content -->
 <main class="flex-shrink-0">
