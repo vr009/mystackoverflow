@@ -6,7 +6,7 @@ from app.managers import UserManager, QuestionManager, TagManager, AnswerManager
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, default=None)
-    avatar = models.CharField(max_length=40)
+    avatar = models.ImageField(null=True, blank=True, verbose_name=u"аватар", upload_to='static/images/')
     name = models.CharField(max_length=40)
     objects = UserManager()
 
@@ -23,7 +23,7 @@ class Question(models.Model):
     title = models.CharField(max_length=255)
     text = models.TextField()
     author = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
-    tags = models.ManyToManyField("Tag")
+    tags = models.ManyToManyField("Tag",default="OK")
     rating = models.IntegerField(default=0,verbose_name="rating")
     date = models.DateField(verbose_name="date added", auto_now_add=True)
 

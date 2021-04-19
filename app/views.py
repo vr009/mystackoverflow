@@ -1,12 +1,13 @@
 from django.shortcuts import render
 from .models import Profile, Question, Tag, Like, Answer
-
+from django.http import Http404
+from django.contrib.auth.models import User
+from django.utils import timezone
 OBJ_NUM = 5
+
 
 def paginate(object_list, signed_up:bool, request, per_page=5):
     pass
-
-
 
 # список новых вопросов
 def index(request):
@@ -20,7 +21,9 @@ def hot(request):
 
 #список вопросов по тегу
 def onetag(request, tag):
-    questions = Question.objects.by_tag(tag)
+    questions = Question.objects.by_tag(tag, OBJ_NUM)
+    if questions.count() == 0:
+        raise Http404("No questions by this tag")
     return render(request, 'onetag.html', {'questions': questions , 'signed_up': True})
 
 
@@ -36,10 +39,11 @@ def settings(request):
 def signup(request):
     return render(request, 'signup.html', {'signed_up': False})
 
-def tagpage(request):
-    return render(request, 'tagpage.html', {'signed_up': False})
-
 def one_question(request, pk: int):
-    question = Question.objects.get(id=pk)
+    try:
+        question = Question.objects.get(id=pk)
+    except question.DoesNotExist:
+        raise Http404
+
     answers = Answer.objects.by_question(pk)
     return render(request, 'question.html', {"question": question, "answers": answers, 'signed_up': True})

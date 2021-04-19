@@ -17,8 +17,8 @@ class QuestionManager(models.Manager):
     def new(self, num:int):
         return self.order_by('-date')[:num]
 
-    def by_tag(self, tag):
-        return self.filter(tags__name__iexact=tag).order_by('-rating')
+    def by_tag(self, tag, num:int):
+        return self.filter(tags__name__iexact=tag).order_by('-rating')[:num]
 
 
 class AnswerManager(models.Manager):
