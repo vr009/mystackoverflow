@@ -18,12 +18,22 @@ class Profile(models.Model):
         verbose_name_plural = "Авторы"
 
 
+class Tag(models.Model):
+    name = models.CharField(max_length=40, verbose_name="имя",default="os")
+    objects = TagManager()
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'тег'
+        verbose_name_plural = 'теги'
 
 class Question(models.Model):
     title = models.CharField(max_length=255)
     text = models.TextField()
     author = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
-    tags = models.ManyToManyField("Tag",default="OK")
+    tags = models.ManyToManyField(Tag, related_name='questions')
     rating = models.IntegerField(default=0,verbose_name="rating")
     date = models.DateField(verbose_name="date added", auto_now_add=True)
 
@@ -59,14 +69,3 @@ class Like(models.Model):
         return str(self.id_question)
 
 
-
-class Tag(models.Model):
-    name = models.CharField(max_length=20, verbose_name="имя")
-    objects = TagManager()
-
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        verbose_name = 'тег'
-        verbose_name_plural = 'теги'

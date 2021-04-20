@@ -16,6 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from app import views
+from .settings import MEDIA_URL, MEDIA_ROOT
+from django.conf.urls.static import static
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
@@ -29,3 +32,5 @@ urlpatterns = [
     path('settings/', views.settings, name='settings'),
     path('signup/', views.signup, name='signup')
 ]
+urlpatterns += static(MEDIA_URL, document_root=MEDIA_ROOT)
+urlpatterns += staticfiles_urlpatterns()

@@ -1,7 +1,7 @@
 {% load static %}
 <div class="row question">
           <div class="col-3">
-            <img src="/static/img/luke.jpg">
+            <img src="/{{ question.author.profile.avatar }}">
             <div class="btn-group" role="group" aria-label="Basic example">
                 <button type="button" class="btn btn-outline-secondary">Like</button>
                 <button type="button" class="btn btn-outline-secondary" style="width: 70px;">Dislike</button>
@@ -13,9 +13,12 @@
           <h4><a href="/question/{{ question.id }}/"> {{ question.author }}: {{ question.title }} </a></h4>
           <p>{{ question.text }}</p>
           <p>Tags:
-              <a href="{% url "tags" tag="{{ question.tags }}" %}">{{ question.tags }}</a>
-              <a href="{% url "tags" tag="{{ question.tags }}" %}">{{ question.tags }}</a>
+              {% for tag in tags %}
+              <a href="{% url "tags" tag="{{ tag.name }}" %}">{{ tag.name }}</a>
+              {% empty %}
+              <p>No tags</p>
+              {% endfor %}
           </p>
-          <a href="{% url "question_answers" pk=1 %}">answers</a>
+          <a href="/question/{{ question.id }}/">answers</a>
         </div>
 </div>
