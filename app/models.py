@@ -51,7 +51,7 @@ class Question(models.Model):
 
 class Answer(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
-    question = models.ForeignKey('Question', on_delete=models.CASCADE,default=None)
+    question = models.ForeignKey(Question, on_delete=models.CASCADE,default=None)
     body = models.TextField()
     is_correct = models.BooleanField(verbose_name='верный', default=False)
     rating_num = models.IntegerField(verbose_name='рейтинг', default=0)
@@ -67,5 +67,4 @@ class Like(models.Model):
 
     def __str__(self):
         return str(self.id_question)
-
 
