@@ -10,7 +10,7 @@
           </div>
 
         <div class="col-8">
-          <h4><a href="/question/{{ question.id }}/"> {{ question.author }}: {{ question.title }} </a></h4>
+          <h4><a href="{{ question.get_absolute_url }}"> {{ question.author }}: {{ question.title }} </a></h4>
           <p>{{ question.text }}</p>
           <p>Tags:
               {% for tag in tags %}
@@ -19,6 +19,6 @@
               <p>No tags</p>
               {% endfor %}
           </p>
-          <a href="/question/{{ question.id }}/">answers</a>
+          <a href="{{ question.get_absolute_url }}">answers</a>                                  #get_absolute_url
         </div>
 </div>

@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from app.managers import UserManager, QuestionManager, TagManager, AnswerManager
-
+from django.shortcuts import reverse
 
 
 class Profile(models.Model):
@@ -39,6 +39,10 @@ class Question(models.Model):
 
     objects = QuestionManager()
 
+    def get_absolute_url(self):
+        return "/question/%i/" % self.pk
+        # return reverse('question_answers', kwargs={'pk':})
+
     def __str__(self):
         return self.title
 
@@ -67,4 +71,3 @@ class Like(models.Model):
 
     def __str__(self):
         return str(self.id_question)
-

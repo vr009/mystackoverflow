@@ -1,35 +1,51 @@
 from django.shortcuts import render
-from django.db.models import ImageField
 from .models import Profile, Question, Tag, Like, Answer
 from django.http import Http404
-from django.contrib.auth.models import User
-from django.utils import timezone
+from django.core.paginator import Paginator, EmptyPage
 
 OBJ_NUM = 5     #константа на количество объектов на странице
 
 
-def paginate(object_list, signed_up:bool, request, per_page=5):
-    pass
+def paginate(object_list, page_num,  request, signed_up=False, per_page=5):
+    if per_page > 10:
+        per_page = 10
+
+    paginator = Paginator(object_list, per_page)
+    try:
+        page = paginator.page(page_num)
+    except EmptyPage:
+        page = Paginator.page(paginator.num_pages)
+
+    return page
+
+
+class Abs:
+    def get_absolute_url(self):
+        from django.urls import reverse
+        return reverse('views.index', args=[str(self.id)])
+
+
 
 # список новых вопросов
 def index(request):
     questions = Question.objects.new(OBJ_NUM)
-    likes = []
     for question in questions:
         question.rating = Like.objects.filter(id_question=question).count()
-    return render(request, 'index.html', {'questions': questions, 'signed_up': True})
+    return render(request, 'index.html', {'questions': questions, 'signed_up': True, 'abs':Abs})
 
 #список горячих вопросов
 def hot(request):
     questions = Question.objects.hot(OBJ_NUM)
-    return render(request, 'hot.html', {'questions': questions, 'signed_up': True})
+    for question in questions:
+        question.rating = Like.objects.filter(id_question=question).count()
+    return render(request, 'hot.html', {'questions': questions, 'signed_up': True, 'abs':Abs})
 
 #список вопросов по тегу
 def onetag(request, tag):
     questions = Question.objects.by_tag(tag, OBJ_NUM)
     if questions.count() == 0:
         raise Http404("No questions by this tag")
-    return render(request, 'onetag.html', {'questions': questions , 'signed_up': True})
+    return render(request, 'onetag.html', {'questions': questions , 'signed_up': True, 'abs':Abs})
 
 
 def ask(request):
