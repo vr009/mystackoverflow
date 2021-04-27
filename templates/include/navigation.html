@@ -1,10 +1,10 @@
 <nav aria-label="Page navigation example">
     <ul class="pagination">
-      <li class="page-item"><a class="page-link" href="/">1</a></li>
-      <li class="page-item"><a class="page-link" href="/">2</a></li>
-      <li class="page-item"><a class="page-link" href="/">3</a></li>
+      <li class="page-item"><a class="page-link" href="{% url "new_questions" pk=1 %}">1</a></li>
+      <li class="page-item"><a class="page-link" href="{% url "new_questions" pk=2 %}">2</a></li>
+      <li class="page-item"><a class="page-link" href="{% url "new_questions" pk=3 %}">3</a></li>
       <li class="page-item"><a class="page-link" href="#">...</a></li>
-      <li class="page-item"><a class="page-link" href="/">53</a></li>
-      <li class="page-item"><a class="page-link" href="/">Next</a></li>
+      <li class="page-item"><a class="page-link" href="{% url "new_questions" pk=53 %}">53</a></li>
+      <li class="page-item"><a class="page-link" href="{% url "new_questions" pk=2 %}">Next</a></li>
     </ul>
   </nav>

@@ -14,38 +14,39 @@ def paginate(object_list, page_num,  request, signed_up=False, per_page=5):
     try:
         page = paginator.page(page_num)
     except EmptyPage:
-        page = Paginator.page(paginator.num_pages)
+        page = paginator.page(paginator.num_pages)
+        # raise Http404
 
     return page
 
 
-class Abs:
-    def get_absolute_url(self):
-        from django.urls import reverse
-        return reverse('views.index', args=[str(self.id)])
-
-
-
 # список новых вопросов
-def index(request):
-    questions = Question.objects.new(OBJ_NUM)
+def index(request,pk = 1):
+    questions = Question.objects.new()
     for question in questions:
         question.rating = Like.objects.filter(id_question=question).count()
-    return render(request, 'index.html', {'questions': questions, 'signed_up': True, 'abs':Abs})
+    pg = paginate(questions,pk,request,True,6)
+    return render(request, 'index.html', {'questions': pg.object_list, 'signed_up': True})
+
 
 #список горячих вопросов
-def hot(request):
-    questions = Question.objects.hot(OBJ_NUM)
+def hot(request, pk = 1):
+    questions = Question.objects.hot()
     for question in questions:
         question.rating = Like.objects.filter(id_question=question).count()
-    return render(request, 'hot.html', {'questions': questions, 'signed_up': True, 'abs':Abs})
+    pg = paginate(questions,pk,request,True,6)
+    return render(request, 'hot.html', {'questions': pg.object_list, 'signed_up': True})
+
 
 #список вопросов по тегу
 def onetag(request, tag):
     questions = Question.objects.by_tag(tag, OBJ_NUM)
+
     if questions.count() == 0:
         raise Http404("No questions by this tag")
-    return render(request, 'onetag.html', {'questions': questions , 'signed_up': True, 'abs':Abs})
+
+    pg = paginate(questions,1,request,True)
+    return render(request, 'onetag.html', {'questions': pg.object_list , 'signed_up': True})
 
 
 def ask(request):
