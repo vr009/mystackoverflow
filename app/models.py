@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from app.managers import UserManager, QuestionManager, TagManager, AnswerManager
+from app.managers import UserManager, QuestionManager, TagManager, AnswerManager, LikeQManager
 from django.shortcuts import reverse
 
 
@@ -68,6 +68,8 @@ class Like(models.Model):
     id_question = models.ForeignKey(Question, on_delete=models.CASCADE)
     id_user = models.ForeignKey(User, null=False, verbose_name='id', on_delete=models.CASCADE)
     value = models.BooleanField(default=False)
+
+    objects=LikeQManager()
 
     class Meta:
         unique_together = ('id_question', 'id_user')

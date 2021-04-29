@@ -23,8 +23,7 @@ def paginate(object_list, page_num,  request, signed_up=False, per_page=5):
 # список новых вопросов
 def index(request,pk = 1):
     questions = Question.objects.new()
-    for question in questions:
-        question.rating = Like.objects.filter(id_question=question).count()
+    Like.objects.like_count(questions)
     pg = paginate(questions,pk,request,True,6)
     return render(request, 'index.html', {'questions': pg.object_list, 'signed_up': True})
 
@@ -32,20 +31,19 @@ def index(request,pk = 1):
 #список горячих вопросов
 def hot(request, pk = 1):
     questions = Question.objects.hot()
-    for question in questions:
-        question.rating = Like.objects.filter(id_question=question).count()
+    Like.objects.like_count(questions)
     pg = paginate(questions,pk,request,True,6)
     return render(request, 'hot.html', {'questions': pg.object_list, 'signed_up': True})
 
 
 #список вопросов по тегу
-def onetag(request, tag):
+def onetag(request, tag, pk=1):
     questions = Question.objects.by_tag(tag, OBJ_NUM)
 
     if questions.count() == 0:
         raise Http404("No questions by this tag")
 
-    pg = paginate(questions,1,request,True)
+    pg = paginate(questions,pk,request,True)
     return render(request, 'onetag.html', {'questions': pg.object_list , 'signed_up': True})
 
 
@@ -67,5 +65,5 @@ def one_question(request, pk: int):
     except question.DoesNotExist:
         raise Http404
 
-    answers = Answer.objects.by_question(pk)
+    answers = paginate(Answer.objects.by_question(pk),1,request,True).object_list
     return render(request, 'question.html', {"question": question, "answers": answers, 'signed_up': True})

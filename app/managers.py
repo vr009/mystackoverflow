@@ -38,3 +38,9 @@ class TagManager(models.Manager):
 
     def popular(self):
         return cache.get('test')
+
+class LikeQManager(models.Manager):
+    def like_count(self,questions):
+        for question in questions:
+            question.rating = self.filter(id_question=question).count()
+        return questions
