@@ -14,7 +14,7 @@
           <p>{{ question.text }}</p>
           <p>Tags:
               {% for tag in question.tags.all %}
-                <a href="{% url "tags" tag="{{ tag }}" %}">{{ tag }}</a>
+                <a href="{% url "tags" tag="{{ tag.name }}" %}">{{ tag.name }}</a>
               {% empty %}
                 <p>No tags</p>
               {% endfor %}

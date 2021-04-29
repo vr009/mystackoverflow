@@ -38,13 +38,13 @@ def hot(request, pk = 1):
 
 #список вопросов по тегу
 def onetag(request, tag, pk=1):
-    questions = Question.objects.by_tag(tag, OBJ_NUM)
+    questions = Question.objects.by_tag(tag)
 
     if questions.count() == 0:
         raise Http404("No questions by this tag")
 
     pg = paginate(questions,pk,request,True)
-    return render(request, 'onetag.html', {'questions': pg.object_list , 'signed_up': True})
+    return render(request, 'onetag.html', {'questions': pg.object_list , 'signed_up': True, 'tag_name': tag})
 
 
 def ask(request):
