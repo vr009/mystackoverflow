@@ -23,6 +23,7 @@ class Command(BaseCommand):
                 for j in range(10):
                     question = Question(title="why?", text="sdasdsasdasd", rating=12, date=timezone.now(),
                                         author=n_user)
+                    question.tags.add(my_tag)
                     question.save()
 
         for i in range(10, 1000, 1):
@@ -33,4 +34,7 @@ class Command(BaseCommand):
                 answ = Answer(user=m_user, question=quest, body="asdadawdadasdas")
                 answ.save()
             a_l = Like.objects.create(id_question=quest, id_user=m_user, value=True)
+
+
+
 

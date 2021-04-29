@@ -19,7 +19,7 @@ class Profile(models.Model):
 
 
 class Tag(models.Model):
-    name = models.CharField(max_length=40, verbose_name="имя",default="os")
+    name = models.CharField(max_length=40,default="os")
     objects = TagManager()
 
     def __str__(self):
@@ -33,7 +33,7 @@ class Question(models.Model):
     title = models.CharField(max_length=255)
     text = models.TextField()
     author = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
-    tags = models.ManyToManyField(Tag, related_name='questions')
+    tags = models.ManyToManyField(Tag)
     rating = models.IntegerField(default=0,verbose_name="rating")
     date = models.DateField(verbose_name="date added", auto_now_add=True)
 
@@ -69,5 +69,17 @@ class Like(models.Model):
     id_user = models.ForeignKey(User, null=False, verbose_name='id', on_delete=models.CASCADE)
     value = models.BooleanField(default=False)
 
+    class Meta:
+        unique_together = ('id_question', 'id_user')
+
     def __str__(self):
         return str(self.id_question)
+
+
+class Answer_Like(models.Model):
+    question = models.ForeignKey(Question,on_delete=models.CASCADE)
+    user = models.ForeignKey(User, null=False, verbose_name='id', on_delete=models.CASCADE)
+    value = models.BooleanField(default=False)
+
+    class Meta:
+        unique_together = ('question', 'user')

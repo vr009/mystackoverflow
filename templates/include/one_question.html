@@ -1,5 +1,5 @@
 {% load static %}
-<div class="row ">
+<div class="row " xmlns="http://www.w3.org/1999/html">
             <div class="col-11 question_head">
                 <div class="col-3" style="position: relative; right: 18px; margin-right: 15px; margin-bottom: 15px;">
                   <img src="/{{ question.author.profile.avatar }}" style="border-radius:.45rem;">
@@ -16,8 +16,11 @@
                     {{ question.text }}
                 </p>
                 <p>Tags:
-                    <a href="{% url "tags" tag="{{ question.tags.name }}" %}">{{ question.tags.name }}</a>
-                    <a href="{% url "tags" tag="{{ question.tags.name }}" %}">{{ question.tags.name }}</a>
+                    {% for tag in question.tags.all %}
+                        <a href="{% url "tags" tag="{{ tag.name }}" %}">{{ tag.name }}</a>
+                    {% empty %}
+                        <p>No tags</p>
+                    {% endfor %}
                 </p>
               </div>
             </div>
