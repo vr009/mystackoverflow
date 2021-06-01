@@ -222,3 +222,13 @@ def check(request, like_dis, questions):
         like = Like(id_question=questions, id_user=request.user, value=True)
         like.save()
         return True
+
+@csrf_exempt
+def is_correct(request):
+    if request.method == 'POST':
+        ans_id = request.POST['answer_id']
+        answer = Answer.objects.get(pk=ans_id)
+        if answer.author_id == request.user.id:
+            answer.is_correct = not answer.is_correct
+            answer.save()
+        return JsonResponse({'status': "ok"})
