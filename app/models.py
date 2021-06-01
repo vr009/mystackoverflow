@@ -8,6 +8,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, default=None)
     avatar = models.ImageField(null=True, blank=True, verbose_name=u"аватар", upload_to='static/images/')
     name = models.CharField(max_length=40)
+
     objects = UserManager()
 
     def __str__(self):

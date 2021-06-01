@@ -27,7 +27,7 @@
 
   <body class="d-flex flex-column h-100">
 
-{% if signed_up %}
+{% if request.user.is_authenticated %}
     {% include "include/navbar.html" %}
 {% else %}
     {% include "include/navbar_unreg.html" %}

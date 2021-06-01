@@ -22,14 +22,19 @@
         <div class="container">
           <div class="row" style="padding-right: inherit;position: fixed; right: 0px; top: 2px;">
             <div class="col-sm-4 profile" style="position: relative; right: 25px;">
-              <img src="{% static "img/profile.jpg"%}">
+              {% if request.user.profile.avatar %}
+                  <img src="{{ request.user.profile.avatar.url }}" style="max-block-size: 98px">
+              {% else %}
+
+              {% endif %}
+
             </div>
 
             <div class="col-sm-8">
-              <div class="" style="color: white;"><h4>Luke Skywalker</h4></div>
+              <div class="" style="color: white;"><h4>{{ request.user.username }}</h4></div>
               <div class="logout" style="display: flex;">
                 <div class="col-sm-5 profile">
-                  <a href="#" style="color:white;"> <h5>log out</h5> </a>
+                  <a href="{% url "logout" %}" style="color:white;"> <h5>log out</h5> </a>
                 </div>
                 <div class="col-sm-3">
                   <a href="{% url "settings" %}" style="color:white;"> <h5>settings</h5> </a>

@@ -30,6 +30,7 @@ urlpatterns = [
     path('tag/<str:tag>/', views.onetag, name='tags'),
     path('ask/', views.ask, name='ask'),
     path('login/', views.login, name='login'),
+    path('logout/', views.logout, name='logout'),
     path('question/<int:pk>/', views.one_question,name='question_answers'),
     path('settings/', views.settings, name='settings'),
     path('signup/', views.signup, name='signup')
