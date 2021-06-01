@@ -4,9 +4,15 @@
       <div class="col-3">
         <img src="/{{ answer.user.profile.avatar }}">
         <div class="btn-group" role="group" aria-label="Basic example">
-           <button type="button" class="btn btn-outline-secondary">Like</button>
-           <button type="button" class="btn btn-outline-secondary">Dislike</button>
-           <input type="text" class="form-control3" placeholder="{{ answer.rating_num }}" aria-label="{{ answer.rating_num }}" aria-describedby="btnGroupAddon">
+           {% if user.is_authenticated %}
+                            <button type="button" class = "btn btn-secondary likes-button" answer="like" data-ans="{{ question.id }}">
+                                <strong>Like</strong>
+                            </button>
+                            <button type="button" class="btn btn-secondary likes-button" answer="dislike" data-ans="{{ question.id }}">
+                                <strong>Dislike</strong>
+                            </button>
+                {% endif %}
+                <input type="text" class="form-control2" placeholder="{{ answer.rating_num }}" aria-label="15" aria-describedby="btnGroupAddon" style="width: 25px;">
         </div>
       </div>
     <div class="col-8 question_text">
