@@ -208,16 +208,17 @@ def add_like(request):
 
 def check(request, like_dis, questions):
     try:
+
         Like.objects.get(id_question=questions, id_user=request.user, value=True)
         return False
     except ObjectDoesNotExist:
         if like_dis == 'like':
+
             questions.rating = questions.rating + 1
             questions.save()
         else:
-            if questions.rating_num > 0:
-                questions.rating = questions.rating - 1
-                questions.save()
+            questions.rating = questions.rating - 1
+            questions.save()
         like = Like(id_question=questions, id_user=request.user, value=True)
         like.save()
         return True
