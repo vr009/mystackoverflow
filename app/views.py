@@ -193,3 +193,31 @@ def get_data(request):
 
 
 
+@csrf_exempt
+def add_like(request):
+    if request.method == 'POST':
+        ans_id = request.POST['answer_id']
+        questions = Question.objects.get(pk=ans_id)
+        like_dis = request.POST['answer']
+        if check(request, like_dis, questions):
+            print("HERE")
+            return JsonResponse({'rating': questions.rating})
+        return JsonResponse({'rating': questions.rating})
+
+
+
+def check(request, like_dis, questions):
+    try:
+        Like.objects.get(id_question=questions, id_user=request.user, value=True)
+        return False
+    except ObjectDoesNotExist:
+        if like_dis == 'like':
+            questions.rating = questions.rating + 1
+            questions.save()
+        else:
+            if questions.rating_num > 0:
+                questions.rating = questions.rating - 1
+                questions.save()
+        like = Like(id_question=questions, id_user=request.user, value=True)
+        like.save()
+        return True

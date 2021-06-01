@@ -3,8 +3,14 @@
           <div class="col-3">
             <img src="/{{ question.author.profile.avatar }}">
             <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-outline-secondary">Like</button>
-                <button type="button" class="btn btn-outline-secondary" style="width: 70px;">Dislike</button>
+                {% if user.is_authenticated %}
+                            <button type="button" class = "btn btn-secondary likes-button" answer="like" data-ans="{{ question.id }}">
+                                <strong>Like</strong>
+                            </button>
+                            <button type="button" class="btn btn-secondary likes-button" answer="dislike" data-ans="{{ question.id }}">
+                                <strong>Dislike</strong>
+                            </button>
+                {% endif %}
                 <input type="text" class="form-control2" placeholder="{{ question.rating }}" aria-label="15" aria-describedby="btnGroupAddon" style="width: 25px;">
             </div>
           </div>

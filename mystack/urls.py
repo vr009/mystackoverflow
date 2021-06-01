@@ -24,6 +24,7 @@ from django.contrib.auth import views as auth_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='new_questions'),
+    path('add_like/', views.add_like, name='add_like'),
     path('<int:pk>/', views.index, name='new_questions'),
     path('hot/', views.hot, name='hot_questions'),
     path('hot/<int:pk>/', views.hot, name='hot_questions'),
