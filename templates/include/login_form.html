@@ -1,0 +1,39 @@
+ <div class="row">
+      <div class="col-8 global">
+        <div class="hot_question new_question" style="margin-bottom: 30px;">
+          <div class="row">
+            <div class="col-4">
+                <span><h1>Log in</h1></span>
+            </div>
+          </div>
+          <div class="row">
+          </div>
+        </div>
+
+{% if form.errors %}
+   <div class="alert alert-danger">{{ form.non_field_errors.as_text|slice:"2:" }}</div>
+{% endif %}
+{% for e in form.none_field_errors %}
+   <div class="alert alert-danger">{{ e }}</div>
+{% endfor %}
+
+<form class="form" method="post" action="{% url 'login' %}">
+  {% csrf_token %}
+    <fieldset>
+      {% for field in form %}
+        <div class="mb-3 row">
+          {% if field.errors %}has-error{% endif %}
+          <label class="control-label">{{ field.label }}</label>
+          <div class=".form-control">{{ field }}</div>
+        </div>
+      {% endfor %}
+    </fieldset>
+   <div class="form-actions"><br/>
+     <button type="submit" class="btn btn-primary">
+       Login
+     </button>
+   </div>
+
+ </form>
+ </div>
+ </div>

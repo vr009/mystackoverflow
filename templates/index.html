@@ -1,0 +1,40 @@
+{% extends "include/base.html" %}
+{% load static %}
+<!doctype html>
+<html lang="en" class="h-100">
+
+
+{% block left_side %}
+
+        <div class="hot_question new_question">
+          <div class="row">
+            <div class="col-4">
+                <span><h1><a href="/">New questions</a></h1></span>
+            </div>
+            <div class="col-4 hot_sub">
+                <span><h3><a href="/hot/">Hot questions</a></h3></span>
+            </div>
+          </div>
+        </div>
+        {% for question in questions %}
+          {% include "include/single_question.html" %}
+        {% endfor %}
+
+        {% include "include/navigation.html" %}
+
+{% endblock left_side %}
+
+
+
+
+    {% block right_side %}
+
+        {% include "include/right_side/poptags.html" %}
+
+        {% include "include/right_side/popusers.html" %}
+
+    {% endblock right_side %}
+
+
+
+

@@ -1,0 +1,35 @@
+{% load static %}
+
+<div class="row question">
+      <div class="col-3">
+        <img src="/{{ answer.user.profile.avatar }}">
+        <div class="btn-group" role="group" aria-label="Basic example">
+           {% if user.is_authenticated %}
+                            <button type="button" class = "btn btn-secondary likes-button" answer="like" data-ans="{{ question.id }}">
+                                <strong>Like</strong>
+                            </button>
+                            <button type="button" class="btn btn-secondary likes-button" answer="dislike" data-ans="{{ question.id }}">
+                                <strong>Dislike</strong>
+                            </button>
+                {% endif %}
+                <input type="text" class="form-control2" placeholder="{{ answer.rating_num }}" aria-label="15" aria-describedby="btnGroupAddon" style="width: 25px;">
+        </div>
+      </div>
+    <div class="col-8 question_text">
+      <p>{{ answer.body }}</p>
+      {% if question.author_id == user.id%}
+        <div>
+             <form>
+                 <div class="form-check my-2">
+                     <label class="form-check-label correct-button" correct-ans="{{ answer.id }}">
+                         <input class="form-check-input" type="checkbox" >
+                         Correct!
+                     </label>
+                 </div>
+             </form>
+
+        </div>
+        {% endif %}
+    </div>
+
+</div>

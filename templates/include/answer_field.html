@@ -1,0 +1,22 @@
+<div class="row " style="width: inherit; margin-bottom: 25px;">
+  <div class="row question_post" style="margin-top: 30px; margin-bottom: 30px;">
+    <form class="form" method="post" action="{% url 'question_answers' pk=question.id %}" >
+      {% csrf_token %}
+    <fieldset>
+      {% for field in answerForm %}
+        <div class="mb-8 row">
+          <label class="control-label">{{ field.label }}</label>
+          <div class=".form-control">{{ field }}</div>
+        </div>
+      {% endfor %}
+    </fieldset>
+   <div class="form-actions"><br/>
+     <button type="submit" class="btn btn-primary">
+       Answer
+     </button>
+   </div>
+
+    </form>
+  </div>
+</div>
+

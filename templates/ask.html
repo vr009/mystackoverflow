@@ -1,0 +1,16 @@
+{% extends "include/base.html" %}
+{% load static %}
+
+{% block left_side %}
+    {% include "include/ask_form.html" %}
+{% endblock left_side %}
+
+
+
+{% block right_side %}
+
+        {% include "include/right_side/poptags.html" %}
+
+        {% include "include/right_side/popusers.html" %}
+
+{% endblock right_side %}

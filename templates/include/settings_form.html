@@ -1,0 +1,33 @@
+{% load static %}
+    <div class="row">
+      <div class="col-8 global">
+        <div class="hot_question new_question" style="margin-bottom: 30px;">
+          <div class="row">
+            <div class="col-6">
+                <span><h1>Settings: {{ request.user.username }}</h1></span>
+            </div>
+          </div>
+        </div>
+
+
+<form class="form" method="post" action="{% url 'settings' %}">
+  {% csrf_token %}
+    <fieldset>
+      {% for field in form %}
+        <div class="mb-3 row">
+
+          <label class="control-label">{{ field.label }}</label>
+          <div class=".form-control">{{ field }}</div>
+        </div>
+      {% endfor %}
+    </fieldset>
+   <div class="form-actions"><br/>
+     <button type="submit" class="btn btn-primary">
+       Save
+     </button>
+   </div>
+
+ </form>
+
+      </div>
+      </div>

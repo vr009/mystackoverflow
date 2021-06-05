@@ -1,0 +1,36 @@
+<header>
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <div class="row" style="display: contents;">
+      <div class="col-10">
+        <div class="container-fluid" style="display:flex;">
+           <a class="navbar-brand" href="{% url "new_questions" %}">mystack</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <form class="d-flex">
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success" formaction="{% url "ask" %}" type="submit">Ask</button>
+            </form>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="col-2">
+
+        <div class="container">
+          <div class="row" style="padding-right: inherit;">
+            <div class="col-sm-6 profile">
+              <a href="{% url "login" %}?continue=/" style="color:white;"> <h4>log in</h4> </a>
+            </div>
+            <div class="col-sm-6">
+              <a href="{% url "signup" %}" style="color:white;"> <h4>register</h4> </a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
